@@ -25,3 +25,5 @@ Trabajar con JOIN entre tablas matcheando los dos campos
 10. Crear un formulario de update de costo de envio
 
 11. Hacer el CRUD en un dashboard
+
+12. Testear una app y hacer una modificacion con las provincias / En proceso con datos.gob.ar

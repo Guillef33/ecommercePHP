@@ -1,11 +1,11 @@
    <?php
 
-    require('logica.php');
+    // require('logica.php');
 
     ?>
 
    <div class="plugin-wrapper">
-       <form id='cuotas_form' class="calculadora-cuotas-form" method="post">
+       <form id='cuotas_form' class="calculadora-cuotas-form" method="post" action="../calculadora/index.php">
            <h3 class="plugin-title">¡Nuestras promociones bancarias!</h3>
            <p>Calcula las cuotas de acuerdo a tu tarjeta y tus descuentos</p>
            <div>
@@ -27,6 +27,5 @@
            </div>
            <button type="submit" class="btn btn-dark">Calcular interes</button>
 
-           <!-- <div id="form-sucess" class="alert alert-primary" role="alert" style="display: none;"></div> -->
        </form>
    </div>

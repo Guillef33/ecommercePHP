@@ -2,15 +2,14 @@
 
 $price = 2000;
 
-// var_dump($_POST);
+// if (isset($_POST['cuotas'])) {
+//     $numero_de_cuotas = $_POST['cuotas'];
+// };
 
-if (isset($_POST['cuotas'])) {
-    $numero_de_cuotas = $_POST['cuotas'];
-};
+// if (isset($_POST['tarjetas'])) {
+//     $tarjetas = $_POST['tarjetas'];
+// };
 
-if (isset($_POST['tarjetas'])) {
-    $tarjetas = $_POST['tarjetas'];
-};
 
 $interes_tarjeta = null;
 
@@ -53,7 +52,3 @@ $precio_cuota = round($total / $numero_de_cuotas);
 if (isset($_POST['cuotas']) &&  (isset($_POST['tarjetas']))) {
     echo '<p class="alert alert-danger" role="alert">Elegiste ' . $_POST['tarjetas'] . 'en ' . $_POST['cuotas'] .  ' cuotas y el precio que vas a pagar en total es de ' . $total .  'y el monto por cuota es de ' . $precio_cuota . '</p>';
 }
-
-// Actualizar precio con el total?
-$price = $total;
-// echo  "<div class='container'><h1>El precio de este producto es de $price </h1></div>";
