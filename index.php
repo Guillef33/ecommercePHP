@@ -1,9 +1,7 @@
 <?php
 
 require('header.php');
-
 require('logica.php');
-
 
 ?>
 
@@ -15,7 +13,6 @@ require('logica.php');
             <div>
                 <select class="form-select" id="select-tarjetas" name="tarjetas" class="boton-tarjetas-credito">
                     <option selected>Elije tu tarjeta</option>
-
                     <option name="master">Master Card</option>
                     <option name="american">AMEX</option>
                     <option name="uala">Uala</option>
@@ -40,6 +37,8 @@ require('logica.php');
     </div>
 </div>
 
+<!-- Calculadora de envio para Ecommerce de acuerdo a codigo postal -->
+<!-- https://www.correoargentino.com.ar/servicios/paqueteria?usuario=16 -->
 
 <?php
 
