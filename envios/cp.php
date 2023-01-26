@@ -48,5 +48,5 @@ if (get_origen($cp_origen, $cp_caba) && get_destino($cp_destino, $cp_caba)) {
 }
 
 if ($precio_envio > 0) {
-    echo 'Gracias. El precio de tu envio en la region de CABA es de' . $precio_envio;
+    echo '<p class="alert alert-danger" role="alert">El precio de tu envio en la region de CABA es de' . $precio_envio . '</p>';
 }

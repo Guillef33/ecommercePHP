@@ -56,5 +56,4 @@ if (isset($_POST['cuotas']) &&  (isset($_POST['tarjetas']))) {
 
 // Actualizar precio con el total?
 $price = $total;
-
-echo "'<h1>El precio de este producto es de $price </h1>'";
+// echo  "<div class='container'><h1>El precio de este producto es de $price </h1></div>";

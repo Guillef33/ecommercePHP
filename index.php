@@ -1,47 +1,32 @@
 <?php
 
 require('header.php');
-require('logica.php');
 
 ?>
 
 <div class="container">
-    <div class="row calculadora-wrapper">
-        <form id='cuotas_form' class="calculadora-cuotas-form" method="post">
-            <h2>¡Nuestras promociones bancarias!</h2>
-            <h5>Calcula las cuotas de acuerdo a tu tarjeta y tus descuentos</h5>
+    <div class="row">
+        <div class="col-8">
+            <img src="./inc/img/images/alternativa.jpg" width="100%" height="800px" style="object-fit: cover;" />
+
+        </div>
+        <div class="col-4">
             <div>
-                <select class="form-select" id="select-tarjetas" name="tarjetas" class="boton-tarjetas-credito">
-                    <option selected>Elije tu tarjeta</option>
-                    <option name="master">Master Card</option>
-                    <option name="american">AMEX</option>
-                    <option name="uala">Uala</option>
-                    <option name="visa">VISA</option>
-
-                </select>
+                <h1>Camiseta oficial Argentina</h1>
+                <h3>Precio: $2000</h3>
+                <p>La camiseta alternativa de Argentina representa la igualdad de género. Esta versión para jovenes, luce tonos morados vibrantes y estampados llamativos inspirados en el Sol de Mayo de la bandera nacional. Creada para envolver a los hinchas en comodidad, esta camiseta incorpora tecnología de absorción AEROREADY. Luce el escudo del club tejido.
+                    Hecho con materiales 100 % reciclados, este producto representa solo una de nuestras soluciones para ayudar a acabar con los residuos plásticos.</p>
             </div>
-            <div>
-                <select class="form-select" aria-label="Select de cuotas" id="select-cuotas" name="cuotas" class="boton-cantidad-cuotas">
-                    <option selected>Elije cuantas cuotas</option>
-                    <option name="1">1</option>
-                    <option name="3">3</option>
-                    <option name="6">6</option>
+            <?php require('./calculadora/calculadora.php'); ?>
 
-                </select>
-            </div>
-            <button type="submit" class="btn btn-dark">Calcular interes</button>
-
-
-            <div id="form-sucess" class="alert alert-primary" role="alert" style="display: none;"></div>
-        </form>
+            <?php require('./envios/envios.php'); ?>
+        </div>
     </div>
+
+
 </div>
 
-<!-- Calculadora de envio para Ecommerce de acuerdo a codigo postal -->
-<!-- https://www.correoargentino.com.ar/servicios/paqueteria?usuario=16 -->
-
 <?php
-
 
 require('footer.php');
 
