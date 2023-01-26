@@ -21,39 +21,25 @@ require('header.php');
             <?php // require('./calculadora/logica.php');
             ?>
 
-            <?php require('./envios/envios.php'); ?>
+            <?php // require('./envios/envios.php'); 
+            ?>
             <?php // require('./envios/cp.php');
             ?>
 
-            <?php require('./crearOrden.php'); ?>
-            <?php require('./persistirOrden.php'); ?>
+            <?php // require('./crearOrden.php'); 
+            ?>
+            <?php // require('./persistirOrden.php'); 
+            ?>
 
 
             <?php
 
 
-            if (isset($_POST['cuotas'])) {
-                $numero_de_cuotas = $_POST['cuotas'];
-            };
-
-            if (isset($_POST['tarjetas'])) {
-                $tarjetas = $_POST['tarjetas'];
-            };
-
-
-            if (isset($_POST['cp_origen'])) {
-                $cp_origen = $_POST['cp_origen'];
-            };
-
-            if (isset($_POST['cp_destino'])) {
-                $cp_destino = $_POST['cp_destino'];
-            };
-
             ?>
 
             <?php if (isset($_POST['compro'])) {
                 persistir($connection, $order);
-            }
+            }   
             ?>
 
         </div>
