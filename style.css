@@ -1,3 +1,7 @@
+/* body {
+    background-color: red;
+} */
+
 .list-js {
     list-style-type: none;
     display: flex;
@@ -8,10 +12,22 @@
     width: 100px;
 }
 
+.product_title {
+    font-size: 20px;
+}
+
+.plugin-title {
+    font-size: 20px;
+}
+
+
 /* Calculadora */
 
-.calculadora-wrapper {
+.plugin-wrapper {
     padding: 5px 0px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 15px;
+    margin: 10px 0px;
 }
 
 /* bootstrap example style */

@@ -12,10 +12,9 @@ require('header.php');
         </div>
         <div class="col-4">
             <div>
-                <h1>Camiseta oficial Argentina</h1>
+                <h1 class="product_title">Camiseta oficial Argentina</h1>
                 <h3>Precio: $2000</h3>
-                <p>La camiseta alternativa de Argentina representa la igualdad de género. Esta versión para jovenes, luce tonos morados vibrantes y estampados llamativos inspirados en el Sol de Mayo de la bandera nacional. Creada para envolver a los hinchas en comodidad, esta camiseta incorpora tecnología de absorción AEROREADY. Luce el escudo del club tejido.
-                    Hecho con materiales 100 % reciclados, este producto representa solo una de nuestras soluciones para ayudar a acabar con los residuos plásticos.</p>
+                <p>La camiseta alternativa de Argentina representa la igualdad de género. Esta versión para jovenes, luce tonos morados vibrantes y estampados llamativos inspirados en el Sol de Mayo de la bandera nacional. Creada para envolver a los hinchas en comodidad, esta camiseta incorpora tecnología de absorción AEROREADY. Luce el escudo del club tejido.</p>
             </div>
             <?php require('./calculadora/calculadora.php'); ?>
 

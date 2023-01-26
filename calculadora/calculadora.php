@@ -4,10 +4,10 @@
 
     ?>
 
-   <div class="calculadora-wrapper">
+   <div class="plugin-wrapper">
        <form id='cuotas_form' class="calculadora-cuotas-form" method="post">
-           <h3>¡Nuestras promociones bancarias!</h3>
-           <h5>Calcula las cuotas de acuerdo a tu tarjeta y tus descuentos</h5>
+           <h3 class="plugin-title">¡Nuestras promociones bancarias!</h3>
+           <p>Calcula las cuotas de acuerdo a tu tarjeta y tus descuentos</p>
            <div>
                <select class="form-select" id="select-tarjetas" name="tarjetas" class="boton-tarjetas-credito">
                    <option selected>Elije tu tarjeta</option>
