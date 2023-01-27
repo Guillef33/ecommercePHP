@@ -1,9 +1,3 @@
-<?php
-
-// require('cp.php')
-
-?>
-
 <div class="plugin-wrapper">
     <form method="post" action="../calculadora/index.php">
         <h3 class="plugin-title">¡Conoce cuanto vas a pagar de envio</h3>
