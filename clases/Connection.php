@@ -12,7 +12,7 @@ class Connection
     {
         if (!isset(self::$link)) {
             self::$link = new PDO(
-                'mysql:host=localhost;dbname=ecommercePHP',
+                'mysql:host=localhost;dbname=ecommercephp',
                 'root',
                 ''
             );
