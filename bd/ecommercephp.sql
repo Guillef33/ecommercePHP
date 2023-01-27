@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 27-01-2023 a las 18:26:17
+-- Tiempo de generación: 27-01-2023 a las 20:22:51
 -- Versión del servidor: 5.7.31
 -- Versión de PHP: 7.3.21
 
@@ -76,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `productTitle` text NOT NULL,
   `productPrice` text NOT NULL,
   `productImage` text NOT NULL,
-  `productoDescription` text NOT NULL,
+  `productoDescription` text,
   `productCategory` text NOT NULL,
   PRIMARY KEY (`productId`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -90,7 +90,10 @@ INSERT INTO `productos` (`productId`, `productTitle`, `productPrice`, `productIm
 (2, 'Camiseta Argentina', '1000', 'img/camiseta.jpg', 'La camiseta titular del equipo campeon', 'Deportes'),
 (3, 'Camiseta Argentina', '1000', 'img/camiseta.jpg', 'La camiseta titular del equipo campeon', 'Deportes'),
 (4, 'Camiseta Argentina', '1000', 'img/camiseta.jpg', 'La camiseta titular del equipo campeon', 'Deportes'),
-(5, 'Camiseta Argentina', '1000', 'img/camiseta.jpg', 'La camiseta titular del equipo campeon', 'Deportes');
+(5, 'Camiseta Argentina', '1000', 'img/camiseta.jpg', 'La camiseta titular del equipo campeon', 'Deportes'),
+(6, '', '', '', NULL, ''),
+(7, '', '', '', NULL, ''),
+(8, '', '', '', NULL, '');
 
 -- --------------------------------------------------------
 

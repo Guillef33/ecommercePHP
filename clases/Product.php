@@ -56,10 +56,10 @@ class Producto
         $productCategory = $_POST['productCategory'];
         $productImage = $_POST['productImage'];
         $link = Connection::conectar();
-        $sql = "INSERT INTO destinos
+        $sql = "INSERT INTO productos
                         ( productTitle, productId, productPrice, productCategory, productImage )
                         VALUE
-                        ( :productTitle, :productId, :productPrice, :productCategory, :productImage )";
+                        ( productTitle, productId, productPrice, productCategory, productImage )";
         $stmt = $link->prepare($sql);
         $stmt->bindParam(':productTitle', $productTitle, PDO::PARAM_STR);
         $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
@@ -67,19 +67,17 @@ class Producto
         $stmt->bindParam(':productCategory', $productCategory, PDO::PARAM_INT);
         $stmt->bindParam(':productImage', $productImage, PDO::PARAM_INT);
         if ($stmt->execute()) {
-            $this->setProductId($link->lastInsertId());
+            // $this->setProductId($link->lastInsertId());
             $this->setProductTitle($productTitle);
             $this->setProductId($productId);
             $this->setProductPrice($productPrice);
             $this->setProductCategory($productCategory);
             $this->setProductImage($productImage);
-            $this->setDestActivo(1); //default
+            // $this->setDestActivo(1); //default
             return $this;
         }
         return false;
     }
-
-    // Hasta aca llegue
 
     public function modificarProducto()
     {
