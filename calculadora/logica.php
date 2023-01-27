@@ -1,10 +1,19 @@
 <?php
 
-require('../envios/logicaCp.php');
+// require('../envios/logicaCp.php');
+
+// require_once(realpath(dirname(__FILE__) . '/envios/logicaCp.php'));
+
+require_once(realpath(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '/envios/logicaCp.php'));
+
+// require_once('C:\wamp649\www\PHPTraining\calculadora\envios\logicaCp.php');
+
+
 
 $interes_tarjeta = null;
 
-function getInteresTarjeta($tarjetas){
+function getInteresTarjeta($tarjetas)
+{
 
     switch ($tarjetas) {
         case 'master':
@@ -41,17 +50,20 @@ function getInteresCuotas($numero_de_cuotas)
     return $interes_cuota;
 }
 
-function getTotalInterestRate($tarjetas, $numero_de_cuotas) {
+function getTotalInterestRate($tarjetas, $numero_de_cuotas)
+{
     $interes = getInteresTarjeta($tarjetas) * (1 + getInteresCuotas($numero_de_cuotas));
     return $interes;
 }
 
-function getTotalPriceWithoutShipment($price, $interes) {
+function getTotalPriceWithoutShipment($price, $interes)
+{
     $total = round($price * (1 + $interes));
     return $total;
 }
 
-function getPaymentPrice($total, $numero_de_cuotas) {
+function getPaymentPrice($total, $numero_de_cuotas)
+{
     $precio_cuota = round($total / $numero_de_cuotas);
     return $precio_cuota;
 }

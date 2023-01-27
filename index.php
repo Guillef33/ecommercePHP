@@ -2,22 +2,33 @@
 
 require('header.php');
 
+var_dump(realpath(dirname(__FILE__)));
+var_dump(DIRECTORY_SEPARATOR);
+
 ?>
 
-<?php require('./calculadora/logica.php');?>
+<?php require('./calculadora/logica.php'); ?>
 <?php require('./persistirOrden.php'); ?>
 <?php require('./crearOrden.php'); ?>
 
 <?php
 
-if (isset($_POST['cuotas'])) { $numero_de_cuotas = $_POST['cuotas']; };
+if (isset($_POST['cuotas'])) {
+    $numero_de_cuotas = $_POST['cuotas'];
+};
 
-if (isset($_POST['tarjetas'])) { $tarjeta = $_POST['tarjetas'];};
+if (isset($_POST['tarjetas'])) {
+    $tarjeta = $_POST['tarjetas'];
+};
 
 
-if (isset($_POST['cp_origen'])) { $cp_origen = $_POST['cp_origen']; };
+if (isset($_POST['cp_origen'])) {
+    $cp_origen = $_POST['cp_origen'];
+};
 
-if (isset($_POST['cp_destino'])) { $cp_destino = $_POST['cp_destino']; };
+if (isset($_POST['cp_destino'])) {
+    $cp_destino = $_POST['cp_destino'];
+};
 
 ?>
 
@@ -46,7 +57,7 @@ $precio_envio = (canISend() && canIPickUp()) ? getPrecioEnvio() : 0;
         <div class="col-4">
             <div>
                 <h1 class="product_title">Camiseta oficial Argentina</h1>
-                <h3>Precio: $' . <?php echo $price?> . '</h3>
+                <h3>Precio: $' . <?php echo $price ?> . '</h3>
                 <p>La camiseta alternativa de Argentina representa la igualdad de género. Esta versión para jovenes, luce tonos morados vibrantes y estampados llamativos inspirados en el Sol de Mayo de la bandera nacional. Creada para envolver a los hinchas en comodidad, esta camiseta incorpora tecnología de absorción AEROREADY. Luce el escudo del club tejido.</p>
             </div>
 
@@ -57,16 +68,16 @@ $precio_envio = (canISend() && canIPickUp()) ? getPrecioEnvio() : 0;
             <?php require('./envios/envios.php'); ?>
 
             <?php
-                if(isset($cp_destino) && isset($cp_origen)) {
-                    echo getErrorStringCp($cp_origen, $cp_destino);
-                }
+            if (isset($cp_destino) && isset($cp_origen)) {
+                echo getErrorStringCp($cp_origen, $cp_destino);
+            }
             ?>
 
 
             <?php
-                echo $precio_envio > 0
-                    ? '<p class="alert alert-danger" role="alert">El precio de tu envio en la region de CABA es de' . $precio_envio . '</p>'
-                    : ''
+            echo $precio_envio > 0
+                ? '<p class="alert alert-danger" role="alert">El precio de tu envio en la region de CABA es de' . $precio_envio . '</p>'
+                : ''
             ?>
 
 
