@@ -2,20 +2,22 @@
 
 require('db.php');
 
+$db = getConnection();
 
+function persistir($order) {
+    global $db;
+    //Get Last order Id
+    $last_id = mysqli_query($db, 'SELECT * FROM ordenes')->num_rows;
 
-function persistir($connection)
-{
-        // To DO: mejorar esto
-        $last_id = mysqli_query($connection, 'SELECT * FROM ordenes')->num_rows;
-        var_dump($last_id);
+    //Add order Id to order values in first position.
+    $order = array_unshift($order, $last_id +1);
 
-        $insertar_nuevo_orden = "INSERT INTO ordenes (id_orden, id_producto, precio, id_usuario, tarjeta, costo_envio, total, cantidad, numero_de_cuotas ) 
-VALUES ($last_id + 1, 1, $price, 3, 2, $precio_envio, $total, 6, $numero_de_cuotas)";
+    // To DO: mejorar esto
+    $insertar_nuevo_orden = "INSERT INTO ordenes 
+        (id_orden, id_producto, precio, id_usuario, tarjeta, costo_envio, total, cantidad, numero_de_cuotas) 
+    VALUES 
+        ($order)";
 
-        // Todo Do PDO
-        $resultado = mysqli_query($connection, $insertar_nuevo_orden);
-
-        var_dump($connection);
-        var_dump($resultado);
+    // Todo Do PDO
+    mysqli_query($db, $insertar_nuevo_orden);
 }
