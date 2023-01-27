@@ -2,30 +2,30 @@
 
 class Producto
 {
-    private $destID;
-    private $destNombre;
-    private $regID;
-    static $regNombre;
-    private $destPrecio;
-    private $destAsientos;
-    private $destDisponibles;
-    private $destActivo;
+    private $id;
+    private $title;
+    // private $regID;
+    //  static $regNombre;
+    private $image;
+    private $description;
+    private $category;
+    private $price;
 
-    public function listarDestinos()
+    public function listarProductos()
     {
         $link = Connection::conectar();
         /* table relation
             $sql = "SELECT
-                        destID, destNombre, 
+                        id, destNombre, 
                         d.regID, regNombre,
                         destPrecio, destAsientos, destDisponibles
                      FROM destinos d, regiones r
                      WHERE d.regID = r.regID";
+                     Aca hay un JOIN con los campos de la otra tabla, revisar en nuestro caso
             */
-        $sql = "SELECT destID, destNombre, destPrecio, 
-                           destAsientos, destDisponibles, 
-                           destActivo, 
-                           r.regID, r.regNombre 
+        $sql = "SELECT id, title, price, 
+                           image, description, 
+                           category, price
                         FROM destinos d 
                         INNER JOIN regiones r 
                         ON d.regID = r.regID";
@@ -35,23 +35,23 @@ class Producto
         return $destinos;
     }
 
-    public function verDestinoPorID()
+    public function verProductoPorID()
     {
-        $destID = $_GET['destID'];
-        $link = Conexion::conectar();
+        $id = $_GET['id'];
+        $link = Connection::conectar();
         $sql = "SELECT
-                        destID, destNombre, 
+                        id, destNombre, 
                         d.regID, regNombre,
                         destPrecio, destAsientos, destDisponibles
                      FROM destinos d, regiones r
                      WHERE d.regID = r.regID
-                       AND destID = :destID";
+                       AND id = :id";
         $stmt = $link->prepare($sql);
-        $stmt->bindParam(':destID', $destID, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $destino = $stmt->fetch();
         //registrar todos los atributos
-        $this->setDestID($destino['destID']);
+        $this->setid($destino['id']);
         $this->setDestNombre($destino['destNombre']);
         $this->setRegID($destino['regID']);
         self::setRegNombre($destino['regNombre']);
@@ -61,14 +61,14 @@ class Producto
         return $this;
     }
 
-    public function agregarDestino()
+    public function agregarProducto()
     {
         $destNombre = $_POST['destNombre'];
         $regID = $_POST['regID'];
         $destPrecio = $_POST['destPrecio'];
         $destAsientos = $_POST['destAsientos'];
         $destDisponibles = $_POST['destDisponibles'];
-        $link = Conexion::conectar();
+        $link = Connection::conectar();
         $sql = "INSERT INTO destinos
                         ( destNombre, regID, destPrecio, destAsientos, destDisponibles )
                         VALUE
@@ -80,7 +80,7 @@ class Producto
         $stmt->bindParam(':destAsientos', $destAsientos, PDO::PARAM_INT);
         $stmt->bindParam(':destDisponibles', $destDisponibles, PDO::PARAM_INT);
         if ($stmt->execute()) {
-            $this->setDestID($link->lastInsertId());
+            $this->setid($link->lastInsertId());
             $this->setDestNombre($destNombre);
             $this->setRegID($regID);
             $this->setDestPrecio($destPrecio);
@@ -92,15 +92,15 @@ class Producto
         return false;
     }
 
-    public function modificarDestino()
+    public function modificarProducto()
     {
-        $destID = $_POST['destID'];
+        $id = $_POST['id'];
         $destNombre = $_POST['destNombre'];
         $regID = $_POST['regID'];
         $destPrecio = $_POST['destPrecio'];
         $destAsientos = $_POST['destAsientos'];
         $destDisponibles = $_POST['destDisponibles'];
-        $link = Conexion::conectar();
+        $link = Connection::conectar();
         $sql = "UPDATE destinos
                         SET 
                             destNombre = :destNombre,
@@ -108,16 +108,16 @@ class Producto
                             destPrecio = :destPrecio,
                             destAsientos = :destAsientos,
                             destDisponibles = :destDisponibles
-                      WHERE destID = :destID";
+                      WHERE id = :id";
         $stmt = $link->prepare($sql);
         $stmt->bindParam(':destNombre', $destNombre, PDO::PARAM_STR);
         $stmt->bindParam(':regID', $regID, PDO::PARAM_INT);
         $stmt->bindParam(':destPrecio', $destPrecio, PDO::PARAM_INT);
         $stmt->bindParam(':destAsientos', $destAsientos, PDO::PARAM_INT);
         $stmt->bindParam(':destDisponibles', $destDisponibles, PDO::PARAM_INT);
-        $stmt->bindParam(':destID', $destID, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         if ($stmt->execute()) {
-            $this->setDestID($destID);
+            $this->setid($id);
             $this->setDestNombre($destNombre);
             $this->setRegID($regID);
             $this->setDestPrecio($destPrecio);
@@ -129,18 +129,18 @@ class Producto
         return false;
     }
 
-    public function eliminarDestino()
+    public function eliminarProducto()
     {
-        $destID = $_POST['destID'];
+        $id = $_POST['id'];
         $destNombre = $_POST['destNombre'];
-        $link = Conexion::conectar();
+        $link = Connection::conectar();
         $sql = "DELETE FROM destinos
-                        WHERE destID = :destID";
+                        WHERE id = :id";
         $stmt = $link->prepare($sql);
-        $stmt->bindParam(':destID', $destID, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         if ($stmt->execute()) {
             //registramos los atributos
-            $this->setDestID($destID);
+            $this->setid($id);
             $this->setDestNombre($destNombre);
             return $this;
         }
@@ -151,17 +151,17 @@ class Producto
     /**
      * @return mixed
      */
-    public function getDestID()
+    public function getid()
     {
-        return $this->destID;
+        return $this->id;
     }
 
     /**
-     * @param mixed $destID
+     * @param mixed $id
      */
-    public function setDestID($destID)
+    public function setid($id)
     {
-        $this->destID = $destID;
+        $this->id = $id;
     }
 
     /**
