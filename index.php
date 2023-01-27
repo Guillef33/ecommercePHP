@@ -57,10 +57,19 @@ $precio_envio = (canISend() && canIPickUp()) ? getPrecioEnvio() : 0;
             <?php require('./envios/envios.php'); ?>
 
             <?php
+                if(isset($cp_destino) && isset($cp_origen)) {
+                    echo getErrorStringCp($cp_origen, $cp_destino);
+                }
+            ?>
+
+
+            <?php
                 echo $precio_envio > 0
                     ? '<p class="alert alert-danger" role="alert">El precio de tu envio en la region de CABA es de' . $precio_envio . '</p>'
                     : ''
             ?>
+
+
 
         </div>
 
