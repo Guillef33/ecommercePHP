@@ -4,42 +4,36 @@ require '../config/config.php';
 require '../clases/Connection.php';
 require '../clases/Product.php';
 $Producto = new Producto;
-$productos = $Producto->listarProductos();
 include('../header.php');
+$Producto->verProductoPorID();
 
+
+var_dump($Producto->getProductId());
+var_dump($Producto->verProductoPorID());
+var_dump($producto['productId']);
 
 ?>
 
 
+
 <main class="container">
-    <h1>Alta de un nuevo producto</h1>
+    <h1>Modificación de un Producto</h1>
 
     <div class="alert bg-light border border-white shadow round col-8 mx-auto p-4">
 
-        <form action="agregarProducto.php" method="post">
+        <form action="modificarProducto.php" method="post">
 
             <div class="form-group">
-                <label for="productTitle">Nombre del Producto:</label>
-                <input type="text" name="productTitle" id="productTitle" class="form-control" required>
+                <label for="destNombre">Nombre del Producto:</label>
+                <input type="text" name="productTitle" value="<?= $Producto->getProductTitle(); ?>" id="productTitle" class="form-control" required>
             </div>
-
-
-            <div class="form-group">
-                <label for="productId">Ingrese el ID:</label>
-                <input type="text" name="productId" id="productId" class="form-control" required>
-            </div>
-
-            <!-- <div class="form-group">
-                <label for="productDescription">Ingrese el ID:</label>
-                <input type="text" name="productDescription" id="productDescription" class="form-control" required>
-            </div> -->
 
             <div class="form-group">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    <input type="number" name="productPrice" class="form-control" placeholder="Ingrese el precio" required>
+                    <input type="number" name="productPrice" value="<?= $Producto->getProductPrice(); ?>" class="form-control" placeholder="Ingrese el precio" required>
                 </div>
             </div>
 
@@ -48,7 +42,7 @@ include('../header.php');
                     <div class="input-group-prepend">
                         <div class="input-group-text">#</div>
                     </div>
-                    <input type="number" name="productCategory" class="form-control" placeholder="Ingrese la categoria" required>
+                    <input type="media" name="productImage" value="<?= $Producto->getProductImage(); ?>" class="form-control" placeholder="Clic para modificar la imagen" required>
                 </div>
             </div>
 
@@ -57,14 +51,14 @@ include('../header.php');
                     <div class="input-group-prepend">
                         <div class="input-group-text">#</div>
                     </div>
-                    <input type="media" name="productImage" class="form-control" placeholder="Ingrese cantidad de imagen" required>
+                    <input type="text" name="productCategory" value="<?= $Producto->getProductCategory(); ?>" class="form-control" placeholder="Elegir la categoria del productow" required>
                 </div>
             </div>
 
-
-            <button class="btn btn-dark mr-3">Agregar producto</button>
+            <input type="hidden" name="productId" value="<?= $Producto->getProductId() ?>">
+            <button class="btn btn-dark mr-3">Modificar Producto</button>
             <a href="adminProductos.php" class="btn btn-outline-secondary">
-                Volver a panel de destinos
+                Volver a panel de Productos
             </a>
 
         </form>

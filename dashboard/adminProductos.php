@@ -40,12 +40,12 @@ include('../header.php');
                     <td><?= $producto['productCategory'] ?></td>
                     <td><img src="<?= $producto['productImage'] ?>" /></td>
                     <td>
-                        <a href="formModificarProducto.php?destID=<?= $producto['productId'] ?>" class="btn btn-outline-secondary">
+                        <a href="formModificarProducto.php?productId=<?= $producto['productId'] ?>" class="btn btn-outline-secondary">
                             Modificar <i class="far fa-edit ml-1"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="formEliminarProducto.php?destID=<?= $producto['productId'] ?>" class="btn btn-outline-secondary">
+                        <a href="formEliminarProducto.php?productId=<?= $producto['productId'] ?>" class="btn btn-outline-secondary">
                             Eliminar <i class="far fa-minus-square ml-1"></i>
                         </a>
                     </td>
@@ -59,5 +59,5 @@ include('../header.php');
 </main>
 
 <?php
-include('../header.php');
+include('../footer.php');
 ?>

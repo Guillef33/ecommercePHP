@@ -4,21 +4,13 @@ class Producto
 {
     private $productId;
     private $productTitle;
-    // private $regID;
-    //  static $regNombre;
     private $productImage;
-    private $productDescription;
     private $productCategory;
     private $productPrice;
 
     public function listarProductos()
     {
         $link = Connection::conectar();
-        // Esto era mas fino pero no me anduvo
-        // $sql = "SELECT productId, productTitle, productPrice, 
-        //                    productImage, productDescription, 
-        //                    productCategory
-        //                 FROM productos";
         $sql = 'SELECT * FROM productos';
         $stmt = $link->prepare($sql);
         $stmt->execute();
@@ -28,15 +20,15 @@ class Producto
 
     public function verProductoPorID()
     {
-        $id = $_GET['id'];
+        $id = $_GET['productId'];
         $link = Connection::conectar();
         $sql = "SELECT
                         productId, productTitle, productImage
                      productPrice, productCategory
                      FROM productos
-                     productId = :id";
+                     productId = :productId";
         $stmt = $link->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':productId', $id, PDO::PARAM_INT);
         $stmt->execute();
         $producto = $stmt->fetch();
         //registrar todos los atributos
@@ -55,11 +47,15 @@ class Producto
         $productPrice = $_POST['productPrice'];
         $productCategory = $_POST['productCategory'];
         $productImage = $_POST['productImage'];
+
+
+        var_dump($_POST['productTitle']);
+
         $link = Connection::conectar();
         $sql = "INSERT INTO productos
                         ( productTitle, productId, productPrice, productCategory, productImage )
                         VALUE
-                        ( productTitle, productId, productPrice, productCategory, productImage )";
+                        ( :productTitle, :productId, :productPrice, :productCategory, :productImage )";
         $stmt = $link->prepare($sql);
         $stmt->bindParam(':productTitle', $productTitle, PDO::PARAM_STR);
         $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
@@ -73,7 +69,6 @@ class Producto
             $this->setProductPrice($productPrice);
             $this->setProductCategory($productCategory);
             $this->setProductImage($productImage);
-            // $this->setDestActivo(1); //default
             return $this;
         }
         return false;
@@ -122,7 +117,7 @@ class Producto
         $stmt->bindParam(':id', $productId, PDO::PARAM_INT);
         if ($stmt->execute()) {
             //registramos los atributos
-            $this->setProductId($id);
+            $this->setProductId($productId);
             $this->setProductTitle($productTitle);
             return $this;
         }
@@ -135,7 +130,7 @@ class Producto
      */
     public function getProductId()
     {
-        return $this->id;
+        return $this->productId;
     }
 
     /**
@@ -143,7 +138,7 @@ class Producto
      */
     public function setProductId($id)
     {
-        $this->id = $id;
+        $this->productId = $id;
     }
 
     /**
@@ -155,28 +150,12 @@ class Producto
     }
 
     /**
-     * @param mixed $destNombre
+     * @param mixed 
      */
     public function setProductTitle($productTitle)
     {
         $this->productTitle = $productTitle;
     }
-
-    // /**
-    //  * @return mixed
-    //  */
-    // public function getProductId()
-    // {
-    //     return $this->productId;
-    // }
-
-    // /**
-    //  * @param mixed $regID
-    //  */
-    // public function setProductId($productId)
-    // {
-    //     $this->productId = $productId;
-    // }
 
     /**
      * @return mixed
@@ -187,7 +166,7 @@ class Producto
     }
 
     /**
-     * @param mixed $destPrecio
+     * @param mixed 
      */
     public function setProductPrice($productPrice)
     {
@@ -203,7 +182,7 @@ class Producto
     }
 
     /**
-     * @param mixed $destAsientos
+     * @param mixed 
      */
     public function setProductCategory($productCategory)
     {
@@ -219,35 +198,10 @@ class Producto
     }
 
     /**
-     * @param mixed $destDisponibles
+     * @param mixed 
      */
     public function setProductImage($productImage)
     {
         $this->productImage = $productImage;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDestActivo()
-    {
-        return $this->destActivo;
-    }
-
-    /**
-     * @param mixed $destActivo
-     */
-    public function setDestActivo($destActivo)
-    {
-        $this->destActivo = $destActivo;
-    }
-
-    public static function getRegNombre()
-    {
-        return self::$regNombre;
-    }
-    public static function setRegNombre($regNombre)
-    {
-        self::$regNombre = $regNombre;
     }
 }

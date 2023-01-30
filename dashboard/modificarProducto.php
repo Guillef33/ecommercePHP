@@ -3,22 +3,20 @@ require '../config/config.php';
 require '../clases/Connection.php';
 require '../clases/Product.php';
 $Producto = new Producto;
-$chequeo = $Producto->agregarProducto();
+$chequeo = $Producto->modificarProducto();
 include('../header.php');
-
-
 
 ?>
 
 <main class="container">
 
-    <h1>Alta de un producto</h1>
+    <h1>Modificacíon de un producto</h1>
 
     <?php
-    $mensaje = 'No se pudo agregar el producto';
+    $mensaje = 'No se pudo modificar el producto';
     $css     = 'danger';
     if ($chequeo) {
-        $mensaje = 'Producto ' . $Producto->getProductTitle() . ' agregado correctamente';
+        $mensaje = 'Producto ' . $Producto->getProductTitle() . ' modificado correctamente';
         $css     = 'success';
     }
     ?>
