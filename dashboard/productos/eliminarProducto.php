@@ -1,7 +1,7 @@
 <?php
-require '../config/config.php';
-require '../clases/Connection.php';
-require '../clases/Product.php';
+require '../../config/config.php';
+require '../../clases/Connection.php';
+require '../../clases/Product.php';
 $Producto = new Producto;
 include('../header.php');
 $check = $Producto->eliminarProducto();
@@ -25,5 +25,5 @@ if ($check) {
 </main>
 
 <?php
-include('../footer.php');
+include('../../footer.php');
 ?>

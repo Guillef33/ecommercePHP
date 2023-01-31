@@ -1,9 +1,9 @@
 <?php
-require '../config/config.php';
-require '../clases/Connection.php';
-require '../clases/Product.php';
+require '../../config/config.php';
+require '../../clases/Connection.php';
+require '../../clases/Product.php';
 $Producto = new Producto;
-include('../header.php');
+include('../../header.php');
 $Producto->verProductoPorID();
 
 var_dump($producto['productId']);
@@ -43,5 +43,5 @@ var_export($Producto->getProductId());
 </main>
 
 <?php
-include('../footer.php');
+include('../../footer.php');
 ?>

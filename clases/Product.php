@@ -29,7 +29,7 @@ class Producto
                      FROM productos
                      WHERE productId = :productId";
         $stmt = $link->prepare($sql);
-        $stmt->bindParam(':productId', intval($id), PDO::PARAM_INT);
+        $stmt->bindParam(':productId', $id, PDO::PARAM_STR);
         var_dump($stmt);
 
         $stmt->execute();
@@ -54,9 +54,6 @@ class Producto
         $productCategory = $_POST['productCategory'];
         $productImage = $_POST['productImage'];
 
-
-        var_dump($_POST['productTitle']);
-
         $link = Connection::conectar();
         $sql = "INSERT INTO productos
                         ( productTitle, productId, productPrice, productCategory, productImage )
@@ -67,9 +64,9 @@ class Producto
         $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
         $stmt->bindParam(':productPrice', $productPrice, PDO::PARAM_INT);
         $stmt->bindParam(':productCategory', $productCategory, PDO::PARAM_INT);
-        $stmt->bindParam(':productImage', $productImage, PDO::PARAM_INT);
+        $stmt->bindParam(':productImage', $productImage, PDO::PARAM_STR);
         if ($stmt->execute()) {
-            // $this->setProductId($link->lastInsertId());
+            $this->setProductId($link->lastInsertId());
             $this->setProductTitle($productTitle);
             $this->setProductId($productId);
             $this->setProductPrice($productPrice);
@@ -82,24 +79,11 @@ class Producto
 
     public function modificarProducto()
     {
-        if (isset($_POST['productId'])) {
-            $productId = $_POST['productId'];
-        }
-        if (isset($_POST['productTitle'])) {
-            $productTitle = $_POST['productTitle'];
-        }
-        if (isset($_POST['productPrice'])) {
-
-            $productPrice = $_POST['productPrice'];
-        }
-        if (isset($_POST['productCategory'])) {
-
-            $productCategory = $_POST['productCategory'];
-        }
-        if (isset($_POST['productImage'])) {
-
-            $productImage = $_POST['productImage'];
-        }
+        $productId = $_POST['productId'];
+        $productTitle = $_POST['productTitle'];
+        $productPrice = $_POST['productPrice'];
+        $productCategory = $_POST['productCategory'];
+        $productImage = $_POST['productImage'];
 
         $link = Connection::conectar();
         $sql = "UPDATE productos
@@ -113,27 +97,14 @@ class Producto
         $stmt->bindParam(':productTitle', $productTitle, PDO::PARAM_STR);
         $stmt->bindParam(':productPrice', $productPrice, PDO::PARAM_INT);
         $stmt->bindParam(':productCategory', $productCategory, PDO::PARAM_INT);
-        $stmt->bindParam(':productImage', $productImage, PDO::PARAM_INT);
+        $stmt->bindParam(':productImage', $productImage, PDO::PARAM_STR);
         $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
         if ($stmt->execute()) {
-            if (isset($productId)) {
-                $this->setProductId($productId);
-            }
-            if (isset($productTitle)) {
-                $this->setProductTitle($productTitle);
-            }
-            if (isset($productPrice)) {
-
-                $this->setProductPrice($productPrice);
-            }
-            if (isset($productCategory)) {
-
-                $this->setProductCategory($productCategory);
-            }
-            if (isset($productImage)) {
-
-                $this->setProductImage($productImage);
-            }
+            $this->setProductId($productId);
+            $this->setProductTitle($productTitle);
+            $this->setProductPrice($productPrice);
+            $this->setProductCategory($productCategory);
+            $this->setProductImage($productImage);
             return $this;
         }
         return false;

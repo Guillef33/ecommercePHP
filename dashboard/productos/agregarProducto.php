@@ -1,10 +1,10 @@
 <?php
-require '../config/config.php';
-require '../clases/Connection.php';
-require '../clases/Product.php';
+require '../../config/config.php';
+require '../../clases/Connection.php';
+require '../../clases/Product.php';
 $Producto = new Producto;
 $chequeo = $Producto->agregarProducto();
-include('../header.php');
+include('../../header.php');
 
 
 
@@ -30,5 +30,5 @@ include('../header.php');
 </main>
 
 <?php
-include('../footer.php');
+include('../../footer.php');
 ?>

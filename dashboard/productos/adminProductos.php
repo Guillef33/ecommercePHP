@@ -1,14 +1,11 @@
 <?php
 
-
-
-require '../config/config.php';
-require '../clases/Connection.php';
-require '../clases/Product.php';
+require '../../config/config.php';
+require '../../clases/Connection.php';
+require '../../clases/Product.php';
 $Producto = new Producto;
 $productos = $Producto->listarProductos();
-include('../header.php');
-$Producto->modificarProducto();
+include('../../header.php');
 ?>
 
 <main class="container">
@@ -61,5 +58,5 @@ $Producto->modificarProducto();
 </main>
 
 <?php
-include('../footer.php');
+include('../../footer.php');
 ?>

@@ -1,18 +1,11 @@
 <?php
 
-require '../config/config.php';
-require '../clases/Connection.php';
-require '../clases/Product.php';
+require '../../config/config.php';
+require '../../clases/Connection.php';
+require '../../clases/Product.php';
 $Producto = new Producto;
-include('../header.php');
+include('../../header.php');
 $Producto->verProductoPorID();
-
-// $productos = $Producto->listarProductos();
-
-
-// var_dump($Producto->getProductId());
-// var_dump($Producto->getProductTitle());
-var_dump($Producto->verProductoPorID());
 
 ?>
 
@@ -84,5 +77,5 @@ var_dump($Producto->verProductoPorID());
 </main>
 
 <?php
-include('../footer.php');
+include('../../footer.php');
 ?>
