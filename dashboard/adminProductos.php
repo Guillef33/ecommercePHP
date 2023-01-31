@@ -8,6 +8,7 @@ require '../clases/Product.php';
 $Producto = new Producto;
 $productos = $Producto->listarProductos();
 include('../header.php');
+$Producto->modificarProducto();
 ?>
 
 <main class="container">
@@ -43,6 +44,7 @@ include('../header.php');
                         <a href="formModificarProducto.php?productId=<?= $producto['productId'] ?>" class="btn btn-outline-secondary">
                             Modificar <i class="far fa-edit ml-1"></i>
                         </a>
+
                     </td>
                     <td>
                         <a href="formEliminarProducto.php?productId=<?= $producto['productId'] ?>" class="btn btn-outline-secondary">

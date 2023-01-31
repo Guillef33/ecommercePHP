@@ -6,25 +6,13 @@ require '../clases/Product.php';
 $Producto = new Producto;
 include('../header.php');
 $Producto->verProductoPorID();
-$productos = $Producto->listarProductos();
+
+// $productos = $Producto->listarProductos();
 
 
-var_dump($Producto->getProductId());
-var_dump($Producto->getProductTitle());
+// var_dump($Producto->getProductId());
+// var_dump($Producto->getProductTitle());
 var_dump($Producto->verProductoPorID());
-
-foreach ($productos as $producto) {
-?>
-    <table>
-        <tr>
-            <td><?= $producto['productId'] ?></td>
-            <td><?= $producto['productTitle'] ?></td>
-        </tr>
-    </table>
-
-<?php
-}
-?>
 
 ?>
 
@@ -57,7 +45,7 @@ foreach ($productos as $producto) {
                     <div class="input-group-prepend">
                         <div class="input-group-text">#</div>
                     </div>
-                    <input type="media" name="productImage" value="<?= $Producto->getProductImage(); ?>" class="form-control" placeholder="Clic para modificar la imagen" required>
+                    <input type="text" name="productImage" value="<?= $Producto->getProductImage(); ?>" class="form-control" placeholder="Clic para modificar la imagen" required>
                 </div>
             </div>
 
