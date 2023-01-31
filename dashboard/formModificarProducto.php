@@ -6,13 +6,28 @@ require '../clases/Product.php';
 $Producto = new Producto;
 include('../header.php');
 $Producto->verProductoPorID();
+$productos = $Producto->listarProductos();
 
 
 var_dump($Producto->getProductId());
+var_dump($Producto->getProductTitle());
 var_dump($Producto->verProductoPorID());
-var_dump($producto['productId']);
+
+foreach ($productos as $producto) {
+?>
+    <table>
+        <tr>
+            <td><?= $producto['productId'] ?></td>
+            <td><?= $producto['productTitle'] ?></td>
+        </tr>
+    </table>
+
+<?php
+}
+?>
 
 ?>
+
 
 
 
@@ -54,6 +69,18 @@ var_dump($producto['productId']);
                     <input type="text" name="productCategory" value="<?= $Producto->getProductCategory(); ?>" class="form-control" placeholder="Elegir la categoria del productow" required>
                 </div>
             </div>
+
+            <!-- Estoy intentando agregar la descripcion -->
+            <div class="form-group">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">#</div>
+                    </div>
+                    <textarea type="text" name="productDescription" value="<?= $Producto->getProductDescription(); ?>" class="form-control" placeholder="Escriba la descripcion" required>
+                    </textarea>
+                </div>
+            </div>
+
 
             <input type="hidden" name="productId" value="<?= $Producto->getProductId() ?>">
             <button class="btn btn-dark mr-3">Modificar Producto</button>

@@ -7,6 +7,7 @@ class Producto
     private $productImage;
     private $productCategory;
     private $productPrice;
+    private $productDescription;
 
     public function listarProductos()
     {
@@ -88,13 +89,13 @@ class Producto
                             productPrice = :productPrice,
                             productCategory = :productCategory,
                             productImage = :productImage
-                      WHERE productId = :id";
+                      WHERE productId = :productId";
         $stmt = $link->prepare($sql);
         $stmt->bindParam(':productTitle', $productTitle, PDO::PARAM_STR);
         $stmt->bindParam(':productPrice', $productPrice, PDO::PARAM_INT);
         $stmt->bindParam(':productCategory', $productCategory, PDO::PARAM_INT);
         $stmt->bindParam(':productImage', $productImage, PDO::PARAM_INT);
-        $stmt->bindParam(':id', $productId, PDO::PARAM_INT);
+        $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
         if ($stmt->execute()) {
             $this->setProductId($productId);
             $this->setProductTitle($productTitle);
@@ -203,5 +204,22 @@ class Producto
     public function setProductImage($productImage)
     {
         $this->productImage = $productImage;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getProductDescription()
+    {
+        return $this->productDescription;
+    }
+
+    /**
+     * @param mixed 
+     */
+    public function setProductDescription($productDescription)
+    {
+        $this->productDescription = $productDescription;
     }
 }
