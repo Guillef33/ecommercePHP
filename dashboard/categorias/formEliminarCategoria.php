@@ -7,6 +7,10 @@ $Categoria = new Category;
 $registros = $Categoria->confirmarBaja();
 include('../../header.php');
 
+var_dump('Registros es:', $registros);
+
+$registros = 0;
+
 ?>
 
 <main class="container">
@@ -17,31 +21,31 @@ include('../../header.php');
             Volver a panel
         </a>
         <?php
-        if ($registros > 0) {
+        // if ($registros > 0) {
         ?>
-            No se puede eliminar la categoria
+        <!--     No se puede eliminar la categoria
             <?= $Categoria->getCatName(); ?>
-            ya que tiene productos relacionados.
+            ya que tiene productos relacionados. -->
         <?php
-        } else {
+        // } else {
         ?>
-            <form action="eliminarCategoria.php" method="post">
-                Se eliminará la categoria <?= $Categoria->getCatName(); ?>
-                <input type="hidden" name="regID" value="<?= $Categoria->getCatId(); ?>">
-                <input type="hidden" name="regNombre" value="<?= $Categoria->getCatName(); ?>">
-                <button class="btn btn-danger">
-                    Confirmar baja
-                </button>
-                <script>
-                    Swal.fire(
-                        'Advertencia',
-                        'Si pulsa el botón "Confirmar Baja", se eliminará la categoria seleccionada.',
-                        'warning'
-                    )
-                </script>
-            </form>
+        <form action="eliminarCategoria.php" method="post">
+            Se eliminará la categoria <?= $Categoria->getCatName(); ?>
+            <input type="hidden" name="catId" value="<?= $Categoria->getCatId(); ?>">
+            <input type="hidden" name="catName" value="<?= $Categoria->getCatName(); ?>">
+            <button class="btn btn-danger">
+                Confirmar baja
+            </button>
+            <script>
+                Swal.fire(
+                    'Advertencia',
+                    'Si pulsa el botón "Confirmar Baja", se eliminará la categoria seleccionada.',
+                    'warning'
+                )
+            </script>
+        </form>
         <?php
-        }
+        // }
         ?>
 
     </div>

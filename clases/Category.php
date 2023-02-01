@@ -56,6 +56,7 @@ class Category
     {
         $catId = $_POST['catId'];
         $catName = $_POST['catName'];
+        var_dump($catId, $catName);
         $link = Connection::conectar();
         $sql = "UPDATE categorias
                            SET catName = :catName 
@@ -69,12 +70,14 @@ class Category
             $this->setCatName($catName);
             return $this; //objeto Categoria
         }
+        var_dump($stmt);
         return false;
     }
 
     public function confirmarBaja()
     {
         $catId = $_GET['catId'];
+        var_dump('Cat ID es:', $catId);
         $this->verCategoriaPorID();
         $link = Connection::conectar();
         $sql = "SELECT 1 FROM categorias 

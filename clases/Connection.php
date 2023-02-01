@@ -11,11 +11,15 @@ class Connection
     static function conectar()
     {
         if (!isset(self::$link)) {
-            self::$link = new PDO(
-                'mysql:host=localhost;dbname=ecommercephp',
-                'root',
-                ''
-            );
+            try {
+                self::$link = new PDO(
+                    'mysql:host=localhost;dbname=ecommercephp',
+                    'root',
+                    ''
+                );
+            } catch (PDOException $e) {
+                die('Unable to connect with the database');
+            }
         }
         return self::$link;
     }

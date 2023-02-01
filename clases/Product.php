@@ -5,9 +5,14 @@ class Producto
     private $productId;
     private $productTitle;
     private $productImage;
+    private $catId;
+    static $catName;
+
     private $productCategory;
     private $productPrice;
     private $productDescription;
+
+    private $image;
 
     public function listarProductos()
     {
@@ -50,28 +55,37 @@ class Producto
     {
         $productTitle = $_POST['productTitle'];
         $productId = $_POST['productId'];
+        $catId = $_POST['catId'];
+        $productImage = $_POST['productImage'];
         $productPrice = $_POST['productPrice'];
         $productCategory = $_POST['productCategory'];
-        $productImage = $_POST['productImage'];
+        // $productImage = $_POST['productImage'];
 
         $link = Connection::conectar();
         $sql = "INSERT INTO productos
-                        ( productTitle, productId, productPrice, productCategory, productImage )
+                        ( productTitle, productId, productPrice, productCategory, catId, productImage)
                         VALUE
-                        ( :productTitle, :productId, :productPrice, :productCategory, :productImage )";
+                        ( :productTitle, :productId, :productPrice, :productCategory, :catId , :productImage)";
         $stmt = $link->prepare($sql);
         $stmt->bindParam(':productTitle', $productTitle, PDO::PARAM_STR);
-        $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+        // $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
+        $stmt->bindParam(':catId', $catId, PDO::PARAM_INT);
         $stmt->bindParam(':productPrice', $productPrice, PDO::PARAM_INT);
         $stmt->bindParam(':productCategory', $productCategory, PDO::PARAM_INT);
+        // $stmt->bindParam(':productImage', $productImage, PDO::PARAM_STR);
         $stmt->bindParam(':productImage', $productImage, PDO::PARAM_STR);
+
         if ($stmt->execute()) {
             $this->setProductId($link->lastInsertId());
             $this->setProductTitle($productTitle);
-            $this->setProductId($productId);
+            // $this->setProductId($productId);
             $this->setProductPrice($productPrice);
             $this->setProductCategory($productCategory);
+            // $this->setProductImage($productImage);
+            $this->setCatId($catId);
             $this->setProductImage($productImage);
+
+
             return $this;
         }
         return false;
@@ -127,6 +141,67 @@ class Producto
         }
         return false;
     }
+
+
+    public function uploadImages()
+    {
+        // if (isset($_POST['submit'])) {
+
+
+        // Count total files
+        $countfiles = count($_FILES['files']['name']);
+
+        // Prepared statement
+        $query = "INSERT INTO imagenes (name,image) VALUES(?,?)";
+
+        $link = Connection::conectar();
+
+        $statement = $link->prepare($query);
+
+        // Loop all files
+        for ($i = 0; $i < $countfiles; $i++) {
+
+            // File name
+            $filename = $_FILES['files']['name'][$i];
+
+            // Location
+            // $ubicacion = '/PHPTraining/calculadora/uploads/';
+
+            $target_file = $_SERVER['DOCUMENT_ROOT'] . '/PHPTraining/calculadora/uploads/images' . $filename;
+            //   $target_file = $ubicacion . $filename;
+
+
+            // file extension
+            $file_extension = pathinfo(
+                $target_file,
+                PATHINFO_EXTENSION
+            );
+
+            $file_extension = strtolower($file_extension);
+
+            // Valid image extension
+            $valid_extension = array("png", "jpeg", "jpg");
+
+            if (in_array($file_extension, $valid_extension)) {
+
+                // Upload file
+                if (move_uploaded_file(
+                    $_FILES['files']['tmp_name'][$i],
+                    $target_file
+                    // $ubicacion . $filename
+                )) {
+
+                    // Execute query
+                    $statement->execute(
+                        array($filename, $target_file)
+                    );
+                }
+            }
+        }
+
+        echo "File upload successfully";
+    }
+    // }
 
 
     /**
@@ -224,5 +299,37 @@ class Producto
     public function setProductDescription($productDescription)
     {
         $this->productDescription = $productDescription;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCatId()
+    {
+        return $this->catId;
+    }
+
+    /**
+     * @param mixed 
+     */
+    public function setCatId($catId)
+    {
+        $this->catId = $catId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed 
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 }

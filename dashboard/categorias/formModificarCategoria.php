@@ -18,7 +18,7 @@ include('../../header.php');
             <div class="form-group">
                 <label for="regNombre">Nombre de la categoria:</label>
                 <input type="text" name="catName" value="<?= $Categoria->getCatName(); ?>" id="catName" class="form-control">
-                <input type="hidden" name="catId" value="<?= $Categoria->getCatName() ?>">
+                <input type="hidden" name="catId" value="<?= $Categoria->getCatId() ?>">
             </div>
 
             <button class="btn btn-dark">Modificar categoria</button>
