@@ -1,5 +1,5 @@
 <?php
-    
+
 class Category
 {
     private $catId;
@@ -27,10 +27,10 @@ class Category
         $stmt = $link->prepare($sql);
         $stmt->bindParam(':catId', $catId, PDO::PARAM_INT);
         $stmt->execute();
-        $datosRegion = $stmt->fetch();
+        $datosCategoria = $stmt->fetch();
         //registramos atributos del objeto
-        $this->setCatId($datosRegion['catId']);
-        $this->setCatName($datosRegion['catName']);
+        $this->setCatId($datosCategoria['catId']);
+        $this->setCatName($datosCategoria['catName']);
         return $this;
     }
     public function agregarCategoria()
@@ -48,7 +48,7 @@ class Category
             //registramos los atributos de objeto
             $this->setCatId($link->lastInsertId());
             $this->setCatName($catName);
-            return $this; //objeto Region
+            return $this; //objeto Categoria
         }
         return false;
     }
@@ -67,7 +67,7 @@ class Category
             //registramos los atributos de objeto
             $this->setCatId($catId);
             $this->setCatName($catName);
-            return $this; //objeto Region
+            return $this; //objeto Categoria
         }
         return false;
     }
@@ -77,7 +77,7 @@ class Category
         $catId = $_GET['catId'];
         $this->verCategoriaPorID();
         $link = Connection::conectar();
-        $sql = "SELECT 1 FROM destinos 
+        $sql = "SELECT 1 FROM categorias 
                         WHERE catId = :catId";
         $stmt = $link->prepare($sql);
         $stmt->bindParam(':catId', $catId, PDO::PARAM_INT);

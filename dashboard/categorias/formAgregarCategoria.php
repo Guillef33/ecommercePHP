@@ -20,7 +20,7 @@ include('../../header.php');
             <label for="catName">Nombre de la categoria:</label>
             <button class="btn btn-dark">Agregar </button>
             <a href="adminCategorias.php" class="btn btn-outline-secondary">
-                Volver a panel de regiones
+                Volver a panel de categorias
             </a>
         </form>
 

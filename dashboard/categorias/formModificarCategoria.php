@@ -13,7 +13,7 @@ include('../../header.php');
 
     <div class="alert bg-light border border-white shadow round col-8 mx-auto p-4">
 
-        <form action="modificarRegion.php" method="post">
+        <form action="modificarCategoria.php" method="post">
 
             <div class="form-group">
                 <label for="regNombre">Nombre de la categoria:</label>
@@ -22,7 +22,7 @@ include('../../header.php');
             </div>
 
             <button class="btn btn-dark">Modificar categoria</button>
-            <a href="adminRegiones.php" class="btn btn-outline-secondary">
+            <a href="adminCategorias.php" class="btn btn-outline-secondary">
                 Volver a panel de categorias
             </a>
         </form>

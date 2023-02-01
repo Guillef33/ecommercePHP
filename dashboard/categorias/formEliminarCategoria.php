@@ -1,17 +1,19 @@
 <?php
 
-require 'config/config.php';
+require '../../config/config.php';
+require '../../clases/Category.php';
+require '../../clases/Connection.php';
 $Categoria = new Category;
 $registros = $Categoria->confirmarBaja();
-include 'includes/over-all-header.html';
-include 'includes/nav.php';
+include('../../header.php');
+
 ?>
 
 <main class="container">
 
     <h1>Baja de una categoria</h1>
     <div class="alert alert-danger col-8 mx-auto p-3">
-        <a href="adminRegiones.php" class="btn btn-light">
+        <a href="adminCategorias.php" class="btn btn-light">
             Volver a panel
         </a>
         <?php
@@ -19,12 +21,12 @@ include 'includes/nav.php';
         ?>
             No se puede eliminar la categoria
             <?= $Categoria->getCatName(); ?>
-            ya que tiene destinos relacionados.
+            ya que tiene productos relacionados.
         <?php
         } else {
         ?>
-            <form action="eliminarRegion.php" method="post">
-                Se eliminará la región <?= $Categoria->getCatName(); ?>
+            <form action="eliminarCategoria.php" method="post">
+                Se eliminará la categoria <?= $Categoria->getCatName(); ?>
                 <input type="hidden" name="regID" value="<?= $Categoria->getCatId(); ?>">
                 <input type="hidden" name="regNombre" value="<?= $Categoria->getCatName(); ?>">
                 <button class="btn btn-danger">
@@ -47,5 +49,5 @@ include 'includes/nav.php';
 </main>
 
 <?php
-include 'includes/footer.php';
+include('../../footer.php');
 ?>
