@@ -17,7 +17,7 @@ include('../../header.php');
                 <th>#</th>
                 <th>Categorias</th>
                 <th colspan="2">
-                    <a href="formAgregarRegion.php" class="btn btn-outline-secondary">
+                    <a href="formAgregarCategoria.php" class="btn btn-outline-secondary">
                         Agregar <i class="far fa-plus-square ml-1"></i>
                     </a>
                 </th>
@@ -31,12 +31,12 @@ include('../../header.php');
                     <td><?= $categoria['catId'] ?></td>
                     <td><?= $categoria['catName'] ?></td>
                     <td>
-                        <a href="formModificarRegion.php?catId=<?= $categoria['catId'] ?>" class="btn btn-outline-secondary">
+                        <a href="formModificarCategoria.php?catId=<?= $categoria['catId'] ?>" class="btn btn-outline-secondary">
                             Modificar <i class="far fa-edit ml-1"></i>
                         </a>
                     </td>
                     <td>
-                        <a href="formEliminarRegion.php?catId=<?= $categoria['catId'] ?>" class="btn btn-outline-secondary">
+                        <a href="formEliminarCategoria.php?catId=<?= $categoria['catId'] ?>" class="btn btn-outline-secondary">
                             Eliminar <i class="far fa-minus-square ml-1"></i>
                         </a>
                     </td>
