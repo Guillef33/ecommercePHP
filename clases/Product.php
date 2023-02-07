@@ -40,7 +40,6 @@ class Producto
         $stmt->execute();
         $producto = $stmt->fetch();
 
-
         //registrar todos los atributos
         $this->setProductId($producto['productId']);
         $this->setProductTitle($producto['productTitle']);
@@ -51,27 +50,44 @@ class Producto
         return $this;
     }
 
+    public function uploadImages()
+
+    {
+        if ($_FILES['productImage']['error'] == 0) {
+            // Ruta donde voy a guardar 
+            $path = $_SERVER['DOCUMENT_ROOT'] . '/PHPTraining/calculadora/uploads/images';
+            // Nombre y ubicacion temporal
+            $temporal = $_FILES['productImage']['tmp_name'];
+            // Renombrar el archivo
+            // timestamp() + extension
+            $productImage = time();
+            // Move the image
+            move_uploaded_file($temporal, $path . $productImage);
+        }
+    }
+
     public function agregarProducto()
     {
         $productTitle = $_POST['productTitle'];
-        $productId = $_POST['productId'];
+        // $productId = $_POST['productId'];
         $catId = $_POST['catId'];
-        $productImage = $_POST['productImage'];
+        // $productImage = $_POST['productImage'];
+        $productImage = $this->uploadImages();
         $productPrice = $_POST['productPrice'];
-        $productCategory = $_POST['productCategory'];
+        // $productCategory = $_POST['productCategory'];
         // $productImage = $_POST['productImage'];
 
         $link = Connection::conectar();
         $sql = "INSERT INTO productos
-                        ( productTitle, productId, productPrice, productCategory, catId, productImage)
+                        ( productTitle, productPrice, catId, productImage)
                         VALUE
-                        ( :productTitle, :productId, :productPrice, :productCategory, :catId , :productImage)";
+                        ( :productTitle, :productPrice, :catId , :productImage)";
         $stmt = $link->prepare($sql);
         $stmt->bindParam(':productTitle', $productTitle, PDO::PARAM_STR);
         // $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
         $stmt->bindParam(':catId', $catId, PDO::PARAM_INT);
         $stmt->bindParam(':productPrice', $productPrice, PDO::PARAM_INT);
-        $stmt->bindParam(':productCategory', $productCategory, PDO::PARAM_INT);
+        //      $stmt->bindParam(':productCategory', $productCategory, PDO::PARAM_INT);
         // $stmt->bindParam(':productImage', $productImage, PDO::PARAM_STR);
         $stmt->bindParam(':productImage', $productImage, PDO::PARAM_STR);
 
@@ -141,68 +157,6 @@ class Producto
         }
         return false;
     }
-
-
-    public function uploadImages()
-    {
-        // if (isset($_POST['submit'])) {
-
-
-        // Count total files
-        $countfiles = count($_FILES['files']['name']);
-
-        // Prepared statement
-        $query = "INSERT INTO imagenes (name,image) VALUES(?,?)";
-
-        $link = Connection::conectar();
-
-        $statement = $link->prepare($query);
-
-        // Loop all files
-        for ($i = 0; $i < $countfiles; $i++) {
-
-            // File name
-            $filename = $_FILES['files']['name'][$i];
-
-            // Location
-            // $ubicacion = '/PHPTraining/calculadora/uploads/';
-
-            $target_file = $_SERVER['DOCUMENT_ROOT'] . '/PHPTraining/calculadora/uploads/images' . $filename;
-            //   $target_file = $ubicacion . $filename;
-
-
-            // file extension
-            $file_extension = pathinfo(
-                $target_file,
-                PATHINFO_EXTENSION
-            );
-
-            $file_extension = strtolower($file_extension);
-
-            // Valid image extension
-            $valid_extension = array("png", "jpeg", "jpg");
-
-            if (in_array($file_extension, $valid_extension)) {
-
-                // Upload file
-                if (move_uploaded_file(
-                    $_FILES['files']['tmp_name'][$i],
-                    $target_file
-                    // $ubicacion . $filename
-                )) {
-
-                    // Execute query
-                    $statement->execute(
-                        array($filename, $target_file)
-                    );
-                }
-            }
-        }
-
-        echo "File upload successfully";
-    }
-    // }
-
 
     /**
      * @return mixed

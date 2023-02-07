@@ -20,7 +20,7 @@ $categorias = $Categoria->listarCategorias();
 
     <div class="alert bg-light border border-white shadow round col-8 mx-auto p-4">
 
-        <form action="agregarProducto.php" method="post">
+        <form action="agregarProducto.php" method="post" enctype='multipart/form-data'>
 
             <div class="form-group">
                 <label for="productTitle">Nombre del Producto:</label>
