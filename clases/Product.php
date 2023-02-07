@@ -53,6 +53,7 @@ class Producto
     public function uploadImages()
 
     {
+        //var_dump($_FILES["productImage"]);
         if ($_FILES['productImage']['error'] == 0) {
             // Ruta donde voy a guardar 
             $path = $_SERVER['DOCUMENT_ROOT'] . '/PHPTraining/calculadora/uploads/images';
@@ -62,49 +63,49 @@ class Producto
             // timestamp() + extension
             $productImage = time();
             // Move the image
-            move_uploaded_file($temporal, $path . $productImage);
+
+            if (move_uploaded_file($temporal, $path . $productImage)) {
+                return $_FILES["productImage"]["name"];
+            } else {
+                return false;
+            }
         }
     }
 
     public function agregarProducto()
     {
-        $productTitle = $_POST['productTitle'];
-        // $productId = $_POST['productId'];
-        $catId = $_POST['catId'];
-        // $productImage = $_POST['productImage'];
-        $productImage = $this->uploadImages();
-        $productPrice = $_POST['productPrice'];
-        // $productCategory = $_POST['productCategory'];
-        // $productImage = $_POST['productImage'];
+        try {
+            $productTitle = $_POST['productTitle'];
+            $catId = $_POST['catId'];
+            $productImage = $this->uploadImages();
+            $productPrice = $_POST['productPrice'];
 
-        $link = Connection::conectar();
-        $sql = "INSERT INTO productos
-                        ( productTitle, productPrice, catId, productImage)
+            $link = Connection::conectar();
+            $sql = "INSERT INTO productos
+                        ( productTitle, productPrice, productCategory, productImage)
                         VALUE
                         ( :productTitle, :productPrice, :catId , :productImage)";
-        $stmt = $link->prepare($sql);
-        $stmt->bindParam(':productTitle', $productTitle, PDO::PARAM_STR);
-        // $stmt->bindParam(':productId', $productId, PDO::PARAM_INT);
-        $stmt->bindParam(':catId', $catId, PDO::PARAM_INT);
-        $stmt->bindParam(':productPrice', $productPrice, PDO::PARAM_INT);
-        //      $stmt->bindParam(':productCategory', $productCategory, PDO::PARAM_INT);
-        // $stmt->bindParam(':productImage', $productImage, PDO::PARAM_STR);
-        $stmt->bindParam(':productImage', $productImage, PDO::PARAM_STR);
-
-        if ($stmt->execute()) {
-            $this->setProductId($link->lastInsertId());
-            $this->setProductTitle($productTitle);
-            // $this->setProductId($productId);
-            $this->setProductPrice($productPrice);
-            $this->setProductCategory($productCategory);
-            // $this->setProductImage($productImage);
-            $this->setCatId($catId);
-            $this->setProductImage($productImage);
+            $stmt = $link->prepare($sql);
+            $stmt->bindParam(':productTitle', $productTitle, PDO::PARAM_STR);
+            $stmt->bindParam(':catId', $catId, PDO::PARAM_INT);
+            $stmt->bindParam(':productPrice', $productPrice, PDO::PARAM_INT);
+            $stmt->bindParam(':productImage', $productImage, PDO::PARAM_STR);
+            if ($stmt->execute()) {
+                $this->setProductId($link->lastInsertId());
+                $this->setProductTitle($productTitle);
+                $this->setProductPrice($productPrice);
+                $this->setCatId($catId);
+                $this->setProductImage($productImage);
 
 
-            return $this;
+                return $this;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
         }
-        return false;
     }
 
     public function modificarProducto()

@@ -71,7 +71,7 @@ $categorias = $Categoria->listarCategorias();
             <div class="form-group">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <input type='file' name='files[]' name="productImage" id="productImage" />
+                        <input type='file' name="productImage" id="productImage" />
                         <!-- <input type='submit' value='Submit' name='submit' /> -->
                     </div>
                 </div>
