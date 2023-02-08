@@ -11,6 +11,10 @@ include('../../header.php');
 
     <h1>Panel de administración de categorias</h1>
 
+    <a href="../productos//adminProductos.php" class="btn btn-outline-secondary">
+        Ver Productos <i class="far fa-edit ml-1"></i>
+    </a>
+
     <table class="table table-borderless table-striped table-hover">
         <thead>
             <tr>
