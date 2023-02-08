@@ -6,8 +6,6 @@ $Producto = new Producto;
 include('../../header.php');
 $Producto->verProductoPorID();
 
-var_dump($producto['productId']);
-var_export($Producto->getProductId());
 ?>
 
 <main class="container">

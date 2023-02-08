@@ -1,106 +1,39 @@
 <?php
 
 require('header.php');
-
-var_dump(realpath(dirname(__FILE__)));
-var_dump(DIRECTORY_SEPARATOR);
-
 ?>
 
-<?php require('./calculadora/logica.php'); ?>
-<?php require('./persistirOrden.php'); ?>
-<?php require('./crearOrden.php'); ?>
-
-<?php
-
-if (isset($_POST['cuotas'])) {
-    $numero_de_cuotas = $_POST['cuotas'];
-};
-
-if (isset($_POST['tarjetas'])) {
-    $tarjeta = $_POST['tarjetas'];
-};
-
-
-if (isset($_POST['cp_origen'])) {
-    $cp_origen = $_POST['cp_origen'];
-};
-
-if (isset($_POST['cp_destino'])) {
-    $cp_destino = $_POST['cp_destino'];
-};
-
-?>
-
-
-<?php
-//TODO: remove hardcoded values:
-$price = 2000;
-
-//Set final values
-$interes = getTotalInterestRate($tarjeta, $numero_de_cuotas);
-$total = getTotalPriceWithoutShipment($price, $interes);
-$precio_cuota = getPaymentPrice($total, $numero_de_cuotas);
-$texto_cuotas = '<p class="alert alert-danger" role="alert">Elegiste ' . $tarjeta . ' en ' . $numero_de_cuotas .  ' cuotas y el precio que vas a pagar en total es de ' . $total .  ' y el monto por cuota es de ' . $precio_cuota . '</p>';
-$precio_envio = (canISend() && canIPickUp()) ? getPrecioEnvio() : 0;
-
-?>
-
-
-
-<div class="container">
+<main class="container">
     <div class="row">
-        <div class="col-8">
-            <img src="./inc/img/images/alternativa.jpg" width="100%" height="800px" style="object-fit: cover;" />
-
-        </div>
-        <div class="col-4">
-            <div>
-                <h1 class="product_title">Camiseta oficial Argentina</h1>
-                <h3>Precio: $' . <?php echo $price ?> . '</h3>
-                <p>La camiseta alternativa de Argentina representa la igualdad de género. Esta versión para jovenes, luce tonos morados vibrantes y estampados llamativos inspirados en el Sol de Mayo de la bandera nacional. Creada para envolver a los hinchas en comodidad, esta camiseta incorpora tecnología de absorción AEROREADY. Luce el escudo del club tejido.</p>
+        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+            <div class="col-md-5 p-lg-5 mx-auto my-5">
+                <h1 class="display-4 fw-normal">La tienda de los campeones del mundo</h1>
+                <p class="lead fw-normal">Elegi los mejores productos de la seleccion argentina.</p>
+                <a class="btn btn-outline-secondary" href="http://localhost/PHPTraining/calculadora/pages/shop">Ir a la tienda</a>
             </div>
-
-            <?php require('./calculadora/calculadora.php'); ?>
-
-            <?php echo (isset($numero_de_cuotas) &&  isset($tarjeta)) ? $texto_cuotas : ''; ?>
-
-            <?php require('./envios/envios.php'); ?>
-
-            <?php
-            if (isset($cp_destino) && isset($cp_origen)) {
-                echo getErrorStringCp($cp_origen, $cp_destino);
-            }
-            ?>
-
-
-            <?php
-            echo $precio_envio > 0
-                ? '<p class="alert alert-danger" role="alert">El precio de tu envio en la region de CABA es de' . $precio_envio . '</p>'
-                : ''
-            ?>
-
-
-
+            <div class="product-device shadow-sm d-none d-md-block"></div>
+            <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
         </div>
-
-        <div>
-            <form action="persistirOrden.php" method="post">
-                <h2>Detalle de tu compra</h2>
-                <p>Precio: <?php echo $price ?> </p>
-                <p>Envio: <?php echo $precio_envio > 0 ? $precio_envio : '' ?></p>
-                <p>Pago con tarjeta: <?php echo $total - $price ?></p>
-                <p>Total: <?php echo $total + $precio_envio ?></p>
-                <button type="submit" name="compro">Comprar</button>
-
-            </form>
-            <?php if (isset($_POST['compro'])) {
-                persistir(newOrder($price, $tarjeta, $precio_envio, $total, $numero_de_cuotas));
-            } ?>
-        </div>
-
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-6 text-bg-dark text-center overflow-hidden">
+            <div class="my-3 py-3">
+                <h2 class="display-5">Camiseta argentina suplente</h2>
+                <p class="lead">And an even wittier subheading.</p>
+            </div>
+            <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+        <div class="col-6 bg-light text-center overflow-hidden">
+            <div class="my-3 p-3">
+                <h2 class="display-5">Camiseta argentina titular</h2>
+                <p class="lead">And an even wittier subheading.</p>
+            </div>
+            <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+        </div>
+    </div>
+
+</main>
 
 
 </div>

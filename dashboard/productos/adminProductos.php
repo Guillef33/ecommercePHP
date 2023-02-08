@@ -14,9 +14,8 @@ include('../../header.php');
     <table class="table table-borderless table-striped table-hover">
         <thead>
             <tr>
-                <th>#</th>
+                <th>Id</th>
                 <th>Nombre de Producto</th>
-                <th>Title</th>
                 <th>Precio</th>
                 <th>Category</th>
                 <th>Imagen</th>

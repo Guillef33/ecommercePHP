@@ -27,7 +27,7 @@ class Producto
     public function verProductoPorID()
     {
         $id = $_GET['productId'];
-        var_dump($id);
+        // var_dump($id);
         $link = Connection::conectar();
         $sql = "SELECT 
                     *
@@ -35,7 +35,7 @@ class Producto
                      WHERE productId = :productId";
         $stmt = $link->prepare($sql);
         $stmt->bindParam(':productId', $id, PDO::PARAM_STR);
-        var_dump($stmt);
+        // var_dump($stmt);
 
         $stmt->execute();
         $producto = $stmt->fetch();

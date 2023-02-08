@@ -8,7 +8,7 @@ $Producto = new Producto;
 $productos = $Producto->listarProductos();
 include('../../header.php');
 
-$images = $Producto->uploadImages();
+// $images = $Producto->uploadImages();
 
 $Categoria = new Category;
 $categorias = $Categoria->listarCategorias();
@@ -72,7 +72,6 @@ $categorias = $Categoria->listarCategorias();
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <input type='file' name="productImage" id="productImage" />
-                        <!-- <input type='submit' value='Submit' name='submit' /> -->
                     </div>
                 </div>
             </div>
