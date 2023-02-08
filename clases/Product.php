@@ -17,7 +17,7 @@ class Producto
     public function listarProductos()
     {
         $link = Connection::conectar();
-        $sql = 'SELECT * FROM productos';
+        $sql = 'SELECT * FROM productos as pro LEFT JOIN categorias as cat ON pro.productCategory = cat.catId';
         $stmt = $link->prepare($sql);
         $stmt->execute();
         $productos = $stmt->fetchAll();
@@ -59,13 +59,15 @@ class Producto
             $path = $_SERVER['DOCUMENT_ROOT'] . '/PHPTraining/calculadora/uploads/images';
             // Nombre y ubicacion temporal
             $temporal = $_FILES['productImage']['tmp_name'];
+
             // Renombrar el archivo
             // timestamp() + extension
             $productImage = time();
             // Move the image
+            $extension = pathinfo($_FILES["productImage"]["name"], PATHINFO_EXTENSION);
 
-            if (move_uploaded_file($temporal, $path . $productImage)) {
-                return $_FILES["productImage"]["name"];
+            if (move_uploaded_file($temporal, $path . $productImage . "." . $extension)) {
+                return "images" . $productImage . "." . $extension;
             } else {
                 return false;
             }
@@ -90,6 +92,7 @@ class Producto
             $stmt->bindParam(':catId', $catId, PDO::PARAM_INT);
             $stmt->bindParam(':productPrice', $productPrice, PDO::PARAM_INT);
             $stmt->bindParam(':productImage', $productImage, PDO::PARAM_STR);
+
             if ($stmt->execute()) {
                 $this->setProductId($link->lastInsertId());
                 $this->setProductTitle($productTitle);

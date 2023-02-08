@@ -17,6 +17,8 @@ class Connection
                     'root',
                     ''
                 );
+                self::$link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$link->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             } catch (PDOException $e) {
                 die('Unable to connect with the database');
             }

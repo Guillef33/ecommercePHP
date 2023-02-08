@@ -2,9 +2,6 @@
 
 require('../../header.php');
 
-// var_dump(realpath(dirname(__FILE__)));
-// var_dump(DIRECTORY_SEPARATOR);
-
 ?>
 
 <?php require('../../calculadora/logica.php'); ?>

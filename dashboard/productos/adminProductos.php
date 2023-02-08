@@ -38,8 +38,9 @@ include('../../header.php');
                     <td><?= $producto['productId'] ?></td>
                     <td><?= $producto['productTitle'] ?></td>
                     <td>$<?= $producto['productPrice'] ?></td>
-                    <td><?= $producto['productCategory'] ?></td>
-                    <td><img src="<?= $producto['productImage'] ?>" /></td>
+                    <td><?= $producto['catName'] ?></td>
+                    <td><img class="image-dashboard" src="<?= '../../uploads/' . $producto['productImage'] ?>" /></td>
+
                     <td>
                         <a href="formModificarProducto.php?productId=<?= $producto['productId'] ?>" class="btn btn-outline-secondary">
                             Modificar <i class="far fa-edit ml-1"></i>
