@@ -1,5 +1,9 @@
 <?php
-
+require 'config/config.php';
+require 'clases/Connection.php';
+require 'clases/Product.php';
+$Producto = new Producto;
+$productos = $Producto->listarProductos();
 require('header.php');
 ?>
 
@@ -17,20 +21,35 @@ require('header.php');
     </div>
 
     <div class="row">
-        <div class="col-6 text-bg-dark text-center overflow-hidden">
-            <div class="my-3 py-3">
-                <h2 class="display-5">Camiseta argentina suplente</h2>
-                <p class="lead">And an even wittier subheading.</p>
+
+        <?php
+
+        foreach (array_slice($productos, 0, 3) as $producto) {
+        ?>
+            <div class="col-4">
+                <div class="card shadow-sm">
+                    <img src="<?php echo 'uploads/' . $producto['productImage']  ?>" style="height: 300px; object-fit: cover;" />
+                    <div class="card-body">
+                        <h2><?php echo $producto['productTitle'] ?></h2>
+                        <p class="card-text"><?php echo "Categoria:" . $producto['catName'] ?></p>
+                        <p class="card-text"><?php echo "Precio:" . $producto['productPrice'] ?></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="single.php?productId=<?= $producto['productId'] ?>">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
+                                </a>
+                                <!-- <button class="btn btn-dark mr-3">Agregar producto</button> -->
+                            </div>
+                            <small class="text-muted">Adidas</small>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-        </div>
-        <div class="col-6 bg-light text-center overflow-hidden">
-            <div class="my-3 p-3">
-                <h2 class="display-5">Camiseta argentina titular</h2>
-                <p class="lead">And an even wittier subheading.</p>
-            </div>
-            <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-        </div>
+        <?php
+        }
+
+        ?>
+
     </div>
 
 </main>

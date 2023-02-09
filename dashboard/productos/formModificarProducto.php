@@ -17,7 +17,7 @@ $Producto->verProductoPorID();
 
     <div class="alert bg-light border border-white shadow round col-8 mx-auto p-4">
 
-        <form action="modificarProducto.php" method="post">
+        <form action="modificarProducto.php" method="post" enctype='multipart/form-data'>
 
             <div class="form-group">
                 <label for="destNombre">Nombre del Producto:</label>
@@ -36,9 +36,9 @@ $Producto->verProductoPorID();
             <div class="form-group">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                        <div class="input-group-text">#</div>
+                        <div class="input-group-text">Imagen</div>
                     </div>
-                    <input type="text" name="productImage" value="<?= $Producto->getProductImage(); ?>" class="form-control" placeholder="Clic para modificar la imagen" required>
+                    <input type="file" name="productImage" value="<?= $Producto->getProductImage(); ?>" class="form-control" placeholder="Clic para modificar la imagen" required>
                 </div>
             </div>
 

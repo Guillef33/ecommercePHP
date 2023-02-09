@@ -17,7 +17,7 @@ class Producto
     public function listarProductos()
     {
         $link = Connection::conectar();
-        $sql = 'SELECT * FROM productos as pro LEFT JOIN categorias as cat ON pro.productCategory = cat.catId';
+        $sql = 'SELECT * FROM productos as pro INNER JOIN categorias as cat ON pro.productCategory = cat.catId';
         $stmt = $link->prepare($sql);
         $stmt->execute();
         $productos = $stmt->fetchAll();
@@ -117,7 +117,9 @@ class Producto
         $productTitle = $_POST['productTitle'];
         $productPrice = $_POST['productPrice'];
         $productCategory = $_POST['productCategory'];
-        $productImage = $_POST['productImage'];
+        $productImage = $this->uploadImages();
+
+     //   $productImage = $_POST['productImage'];
 
         $link = Connection::conectar();
         $sql = "UPDATE productos
