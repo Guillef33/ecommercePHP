@@ -32,10 +32,11 @@ include('../header.php');
                                 <p class="card-text"><?php echo "Precio:" . $producto['productPrice'] ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-                                        <form action="single.php?productId=<?= $producto['productId'] ?>" method="post">
-                                            <button class="btn btn-dark mr-3">Agregar producto</button>
-                                        </form>
+                                        <a href="single.php?productId=<?= $producto['productId'] ?>">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
+                                        </a>
+                                        <button class="btn btn-dark mr-3">Agregar producto</button>
+
                                     </div>
                                     <small class="text-muted">Adidas</small>
                                 </div>
