@@ -33,7 +33,9 @@ include('../header.php');
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Agregar al carrito</button>
+                                        <form action="single.php?productId=<?= $producto['productId'] ?>" method="post">
+                                            <button class="btn btn-dark mr-3">Agregar producto</button>
+                                        </form>
                                     </div>
                                     <small class="text-muted">Adidas</small>
                                 </div>

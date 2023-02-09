@@ -43,8 +43,6 @@ $precio_envio = (canISend() && canIPickUp()) ? getPrecioEnvio() : 0;
 
 ?>
 
-
-
 <div class="container">
     <div class="row">
         <div class="col-8">
@@ -99,8 +97,6 @@ $precio_envio = (canISend() && canIPickUp()) ? getPrecioEnvio() : 0;
     </div>
 </div>
 
-
-</div>
 
 <?php
 
