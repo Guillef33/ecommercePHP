@@ -163,6 +163,8 @@ include('../header.php');
 <?php
 
 $cart = [$_POST['cart']];
+$Producto = new Producto;
+$cart = $Producto->agregarAlCarrito();
 
 foreach ($cart as $products) {
 ?>

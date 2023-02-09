@@ -119,7 +119,7 @@ class Producto
         $productCategory = $_POST['productCategory'];
         $productImage = $this->uploadImages();
 
-     //   $productImage = $_POST['productImage'];
+        //   $productImage = $_POST['productImage'];
 
         $link = Connection::conectar();
         $sql = "UPDATE productos
@@ -162,6 +162,25 @@ class Producto
             return $this;
         }
         return false;
+    }
+
+    public function agregarAlCarrito($productId, $productTitle)
+    {
+        session_start();
+
+        $cart = $_SESSION["cart"];//Carrito anterior.
+
+        if(isset($_SESSION["cart"]) AND count($cart) > 0){
+            $cart[] = array("id"=>$productId,"productTitle"=> $productTitle);
+            $_SESSION["cart"] = $cart;
+            return $cart;
+        }
+        elseif(!isset($_SESSION["cart"]) AND count($cart) == 0){
+            $_SESSION["cart"] = [["id"=>$productId,"productTitle"=>$productTitle]];
+        }else{
+            throw new Error();
+        }
+
     }
 
     /**

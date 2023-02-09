@@ -35,7 +35,7 @@ require('header.php');
                         <p class="card-text"><?php echo "Precio:" . $producto['productPrice'] ?></p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="single.php?productId=<?= $producto['productId'] ?>">
+                                <a href="pages/single.php?productId=<?= $producto['productId'] ?>">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
                                 </a>
                                 <!-- <button class="btn btn-dark mr-3">Agregar producto</button> -->
