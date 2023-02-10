@@ -1,4 +1,6 @@
 function addProduct(element) {
+  console.log("Funciona");
+
   console.log(element);
   let product = element.value.split("-"); // 3-Zapatilla
   let idProduct = product[0];
@@ -16,5 +18,6 @@ function addProduct(element) {
     .then((data) => {
       console.log(data);
       //Cambiar el boton de Agregar a Quitar
+      
     });
 }

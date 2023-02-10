@@ -24,6 +24,19 @@ class Producto
         return $productos;
     }
 
+    // Debemos buscar la manera de matchear el carrito con el listado de productos
+    public function buscarProductos($id)
+    {
+        $link = Connection::conectar();
+        var_dump($link);
+        $sql = 'SELECT * FROM productos as pro INNER JOIN categorias as cat ON pro.productCategory = cat.catId WHERE pro.productId = :id';
+        $stmt = $link->prepare($sql);
+        $stmt->bindParam(':productId', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $productos = $stmt->fetch();
+        return $productos;
+    }
+
     public function verProductoPorID()
     {
         $id = $_GET['productId'];
@@ -34,7 +47,6 @@ class Producto
                      WHERE productId = :productId";
         $stmt = $link->prepare($sql);
         $stmt->bindParam(':productId', $id, PDO::PARAM_STR);
-        // var_dump($stmt);
 
         $stmt->execute();
         $producto = $stmt->fetch();
@@ -163,21 +175,32 @@ class Producto
         return false;
     }
 
-    public function agregarAlCarrito($productId, $productTitle)
+    public function agregarAlCarrito($productId, $productTitle, $productImage, $productPrice)
     {
         session_start();
+        // products va a ser el producto que intento agregar pero dentro de un array con todos los datos
+        // $product = $this->buscarProductos($productId);
 
-        // $productId = $_GET["productId"];
-        // $productTitle = $_GET["productTitle"];
+        // var_dump($product);
+        // unset($_SESSION["cart"]);
 
         $cart = $_SESSION["cart"]; //Carrito anterior.
+        // var_dump($cart);
 
         if (isset($_SESSION["cart"]) and count($cart) > 0) {
-            $cart[] = array("id" => $productId, "productTitle" => $productTitle);
+            // Aca sumamos un indice nuevo al final
+            $cart[] = array("id" => $productId, "productTitle" => $productTitle, "productImage" => $productImage, "productPrice" => $productPrice);
             $_SESSION["cart"] = $cart;
+            // $cart = array();
+            // $_SESSION['cart'] = $cart;
+            // $cart[] = $product;
+
+            // var_dump($cart);
             return $cart;
         } elseif (!isset($_SESSION["cart"]) and count($cart) == 0) {
-            $_SESSION["cart"] = [["id" => $productId, "productTitle" => $productTitle]];
+            // $_SESSION["cart"] = array($product);
+            $_SESSION["cart"] = [["id" => $productId, "productTitle" => $productTitle, "productImage" => $productImage, "productPrice" => $productPrice]];
+            return $cart;
         } else {
             throw new Error();
         }

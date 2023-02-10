@@ -17,7 +17,6 @@ include('../header.php');
             <div class="row">
 
                 <?php
-
                 foreach (array_slice($productos, 0, 9) as $producto) {
                 ?>
                     <div class="col-4">

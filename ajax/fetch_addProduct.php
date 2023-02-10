@@ -1,14 +1,21 @@
 <?php
 
+require("../clases/Connection.php");
 require_once("../clases/Product.php");
 $Producto = new Producto();
-// $productId = $_GET["productId"];
-// $productTitle = $_GET["productTitle"];
+$productId = $_POST["productId"];
+$productTitle = $_POST["productTitle"];
+$productImage = $_POST["productImage"];
+$productPrice = $_POST["productPrice"];
 
-$addCart = $_GET['AddCart'];
+var_dump($productId);
+var_dump($productTitle);
 
-// var_dump($productId, $productTitle);
-var_dump($addCart);
-$agregarCarrito = $Producto->agregarAlCarrito($productId, $productTitle);
+// unset($_SESSION);
+
+$agregarCarrito = $Producto->agregarAlCarrito($productId, $productTitle, $productImage, $productPrice);
+
+
+var_dump(json_encode($agregarCarrito));
 
 return json_encode($agregarCarrito);

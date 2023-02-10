@@ -1,11 +1,21 @@
 <?php
+
+// Si vamos a usar variables de sesion, debemos iniciar la sesion con session start
+session_start();
+
 require '../clases/Connection.php';
 require '../clases/Product.php';
 require '../clases/Category.php';
 include('../header.php');
 $Producto = new Producto;
-$productos = $Producto->listarProductos();
-$productos = $Producto->agregarAlCarrito();
+// $productos = $Producto->listarProductos();
+// Aca traemos el carrito que esta guardado en la sesion
+$carrito = $_SESSION["cart"];
+
+// var_dump($carrito);
+
+$cantidad = 1;
+$total = 0;
 
 
 ?>
@@ -41,20 +51,21 @@ $productos = $Producto->agregarAlCarrito();
                                                 </thead>
                                                 <tbody>
 
-                                                    <?php foreach ($productos as $producto) {
+                                                    <?php foreach ($carrito as $producto) {
                                                     ?>
                                                         <tr>
                                                             <th scope="row">1</th>
                                                             <td><a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a></td>
-                                                            <td><img src="<?php echo $producto['productImage'] ?>" class="img-fluid" width="35" alt="product"></td>
+                                                            <td><img src="<?php echo '../uploads/' . $producto['productImage']  ?>" class="img-fluid" width="35" alt="product"></td>
                                                             <td><?php echo $producto['productTitle'] ?></td>
                                                             <td>
                                                                 <div class="form-group mb-0">
                                                                     <input type="number" class="form-control cart-qty" name="cartQty1" id="cartQty1" value="1">
                                                                 </div>
                                                             </td>
-                                                            <td>$<?php echo $producto['productPrice'] ?></td>
-                                                            <td class="text-right">$500</td>
+                                                            <td>$<?php echo $producto['productPrice']
+                                                                    ?></td>
+                                                            <td class="text-right"><?php echo $total +  $producto['productPrice'] ?></td>
                                                         </tr>
                                                     <?php
                                                     }
