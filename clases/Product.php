@@ -27,7 +27,6 @@ class Producto
     public function verProductoPorID()
     {
         $id = $_GET['productId'];
-        // var_dump($id);
         $link = Connection::conectar();
         $sql = "SELECT 
                     *
@@ -168,19 +167,20 @@ class Producto
     {
         session_start();
 
-        $cart = $_SESSION["cart"];//Carrito anterior.
+        // $productId = $_GET["productId"];
+        // $productTitle = $_GET["productTitle"];
 
-        if(isset($_SESSION["cart"]) AND count($cart) > 0){
-            $cart[] = array("id"=>$productId,"productTitle"=> $productTitle);
+        $cart = $_SESSION["cart"]; //Carrito anterior.
+
+        if (isset($_SESSION["cart"]) and count($cart) > 0) {
+            $cart[] = array("id" => $productId, "productTitle" => $productTitle);
             $_SESSION["cart"] = $cart;
             return $cart;
-        }
-        elseif(!isset($_SESSION["cart"]) AND count($cart) == 0){
-            $_SESSION["cart"] = [["id"=>$productId,"productTitle"=>$productTitle]];
-        }else{
+        } elseif (!isset($_SESSION["cart"]) and count($cart) == 0) {
+            $_SESSION["cart"] = [["id" => $productId, "productTitle" => $productTitle]];
+        } else {
             throw new Error();
         }
-
     }
 
     /**

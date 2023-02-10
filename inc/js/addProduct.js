@@ -1,4 +1,5 @@
 function addProduct(element) {
+  console.log(element);
   let product = element.value.split("-"); // 3-Zapatilla
   let idProduct = product[0];
   let productTitle = product[1];

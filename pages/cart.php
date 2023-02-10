@@ -1,5 +1,12 @@
 <?php
+require '../clases/Connection.php';
+require '../clases/Product.php';
+require '../clases/Category.php';
 include('../header.php');
+$Producto = new Producto;
+$productos = $Producto->listarProductos();
+$productos = $Producto->agregarAlCarrito();
+
 
 ?>
 
@@ -33,45 +40,26 @@ include('../header.php');
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td><a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a></td>
-                                                        <td><img src="https://themesbox.in/admin-templates/olian/html/light-vertical/assets/images/ecommerce/product_01.svg" class="img-fluid" width="35" alt="product"></td>
-                                                        <td>Apple Watch</td>
-                                                        <td>
-                                                            <div class="form-group mb-0">
-                                                                <input type="number" class="form-control cart-qty" name="cartQty1" id="cartQty1" value="1">
-                                                            </div>
-                                                        </td>
-                                                        <td>$10</td>
-                                                        <td class="text-right">$500</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td><a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a></td>
-                                                        <td><img src="https://themesbox.in/admin-templates/olian/html/light-vertical/assets/images/ecommerce/product_02.svg" class="img-fluid" width="35" alt="product"></td>
-                                                        <td>Apple iPhone</td>
-                                                        <td>
-                                                            <div class="form-group mb-0">
-                                                                <input type="number" class="form-control cart-qty" name="cartQty2" id="cartQty2" value="1">
-                                                            </div>
-                                                        </td>
-                                                        <td>$20</td>
-                                                        <td class="text-right">$200</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td><a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a></td>
-                                                        <td><img src="https://themesbox.in/admin-templates/olian/html/light-vertical/assets/images/ecommerce/product_03.svg" class="img-fluid" width="35" alt="product"></td>
-                                                        <td>Apple iPad</td>
-                                                        <td>
-                                                            <div class="form-group mb-0">
-                                                                <input type="number" class="form-control cart-qty" name="cartQty3" id="cartQty3" value="1">
-                                                            </div>
-                                                        </td>
-                                                        <td>$30</td>
-                                                        <td class="text-right">$300</td>
-                                                    </tr>
+
+                                                    <?php foreach ($productos as $producto) {
+                                                    ?>
+                                                        <tr>
+                                                            <th scope="row">1</th>
+                                                            <td><a href="#" class="text-danger"><i class="ri-delete-bin-3-line"></i></a></td>
+                                                            <td><img src="<?php echo $producto['productImage'] ?>" class="img-fluid" width="35" alt="product"></td>
+                                                            <td><?php echo $producto['productTitle'] ?></td>
+                                                            <td>
+                                                                <div class="form-group mb-0">
+                                                                    <input type="number" class="form-control cart-qty" name="cartQty1" id="cartQty1" value="1">
+                                                                </div>
+                                                            </td>
+                                                            <td>$<?php echo $producto['productPrice'] ?></td>
+                                                            <td class="text-right">$500</td>
+                                                        </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -141,39 +129,3 @@ include('../header.php');
         <!-- End row -->
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-
-$cart = [$_POST['cart']];
-$Producto = new Producto;
-$cart = $Producto->agregarAlCarrito();
-
-foreach ($cart as $products) {
-?>
-    <ul>
-        <li><?= $products['name'] ?></li>
-        <li><?= $products['name'] ?></li>
-    </ul>
-    <p>Total: <?= $cart['total'] ?></p>
-<?php
-}
-
-?>
